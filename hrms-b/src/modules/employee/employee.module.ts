@@ -12,6 +12,7 @@ import { EmployeeService } from './employee.service';
     TypeOrmModule.forFeature([Role, Employee])
   ],
   providers: [RoleService, EmployeeService],
-  controllers: [RoleController, EmployeeController]
+  controllers: [RoleController, EmployeeController],
+  exports: [EmployeeService]
 })
 export class EmployeeModule { }

@@ -87,9 +87,7 @@ export class EmployeeService {
   }
 
   async findAll() {
-    const employees = await this.employeeRepository.find({
-      relations: ['role']
-    });
+    const employees = await this.employeeRepository.find();
 
     return {
       employees
@@ -101,7 +99,7 @@ export class EmployeeService {
       where: {
         empId
       },
-      relations: ['role']
+      relations: ['role', 'leaves', 'attendances']
     });
 
     if (!employee) {

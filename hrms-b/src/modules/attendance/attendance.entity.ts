@@ -1,11 +1,6 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Employee } from "../employee/employee.entity";
-
-enum Status {
-  PRESENT = 'PRESENT',
-  ABSENT = 'ABSENT',
-  LATE = 'LATE'
-}
+import { Status } from "src/enums/status.enum";
 
 @Entity({ name: 'attendances' })
 export class Attendance extends BaseEntity {
@@ -15,11 +10,11 @@ export class Attendance extends BaseEntity {
   @Column({ name: 'check_in', type: 'datetime' })
   checkIn: Date;
 
-  @Column({ name: 'check_out', type: 'datetime' })
+  @Column({ name: 'check_out', type: 'datetime', default: null })
   checkOut: Date;
 
-  @Column({ name: 'status', type: 'enum', enum: Status })
-  status: Status;
+  @Column({ name: 'att_status', type: 'enum', enum: Status })
+  attStatus: Status;
 
   @ManyToOne(() => Employee, employee => employee.attendances)
   @JoinColumn({ name: 'emp_id' })
